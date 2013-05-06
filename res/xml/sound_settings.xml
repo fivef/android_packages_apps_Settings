@@ -116,6 +116,12 @@
             android:title="@string/volume_adjust_sounds_enable_title"
             android:summary="@string/volume_adjust_sounds_enable_summary"
             android:persistent="false" />
+            
+    <CheckBoxPreference
+            android:key="media_volume_default"
+            android:title="@string/media_volume_default_enabled_title"
+            android:summary="@string/media_volume_default_enabled_summary"
+            android:persistent="false" />
 
     <ListPreference
             android:key="emergency_tone"

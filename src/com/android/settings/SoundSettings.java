@@ -92,6 +92,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_CONVERT_SOUND_TO_VIBRATE = "notification_convert_sound_to_vibration";
     private static final String KEY_SAFE_HEADSET_VOLUME = "safe_headset_volume";
     private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
+    private static final String KEY_MEDIA_VOLUME_DEFAULT = "media_volume_default";
 
     private static final String RING_MODE_NORMAL = "normal";
     private static final String RING_MODE_VIBRATE = "vibrate";
@@ -114,6 +115,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
     private CheckBoxPreference mVolumeAdjustSounds;
+    private CheckBoxPreference mMediaVolumeDefault;
     private Preference mMusicFx;
     private CheckBoxPreference mLockSounds;
     private CheckBoxPreference mHeadsetConnectPlayer;
@@ -243,6 +245,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVolumeAdjustSounds = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
         mVolumeAdjustSounds.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) != 0);
+        mMediaVolumeDefault = (CheckBoxPreference) findPreference(KEY_MEDIA_VOLUME_DEFAULT);
+        mMediaVolumeDefault.setChecked(Settings.System.getInt(resolver,
+                Settings.System.MEDIA_VOLUME_DEFAULT_ENABLED, 0) != 0);
         mLockSounds = (CheckBoxPreference) findPreference(KEY_LOCK_SOUNDS);
         mLockSounds.setPersistent(false);
         mLockSounds.setChecked(Settings.System.getInt(resolver,
@@ -440,6 +445,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mVolumeAdjustSounds) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
                     mVolumeAdjustSounds.isChecked() ? 1 : 0);
+
+        } else if (preference == mMediaVolumeDefault) {
+            Settings.System.putInt(getContentResolver(), Settings.System.MEDIA_VOLUME_DEFAULT_ENABLED,
+                    mMediaVolumeDefault.isChecked() ? 1 : 0);
 
         } else if (preference == mLockSounds) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
